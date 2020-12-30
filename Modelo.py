@@ -28,6 +28,28 @@ def buscarU(_user):
     else: 
             return redirect(url_for('errorr'))   
 
+def local(_nombrel,_direccion, _dinero, _interese, _comentarios,nombre1):
+
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        query = "INSERT INTO C_locals (NAME, ADRESS, MONEY, INTEREST, COMMENTS) VALUES ('"+_nombrel+"', '"+_direccion+"' '"+_dinero+"' '"+_interese+"' '"+ _comentarios+"')"
+        cursor.execute(query)
+        data = cursor.fetchall()
+
+        if len(data)==0:
+            conn.commit()
+            return True
+        else:
+            return False
+
+    except:
+        cursor.close()
+        conn.close()
+        return redirect(url_for('errorr')) 
+            
+ 
+
 
 def validar(user, _contrasena):
     try:
